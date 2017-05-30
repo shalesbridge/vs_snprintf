@@ -93,4 +93,3 @@ int snprintf(char *s, size_t n, const char *format, ...)
 }
 
 
-#define snprintf _snprintf
