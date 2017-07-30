@@ -9,11 +9,6 @@ extern "C"
 //
 // Compatibility library for providing snprintf to VS 2008.
 //
-// $Revision$
-// $Date$
-// $Author$
-// $HeadURL$
-//
 // Original Creation Date: 2017-05-30
 // Author: Brandon Huber
 //
@@ -31,6 +26,10 @@ extern "C"
 
 int snprintf ( char * s, size_t n, const char * format, ... );
 
+#else
+
+// If snprintf already exists, it should be in "stdio.h".
+#include "stdio.h"
 
 #endif
 

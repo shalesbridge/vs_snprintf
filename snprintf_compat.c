@@ -4,11 +4,6 @@
 //
 // Compatibility wrapper providing snprintf for VS2008
 //
-// $Revision$
-// $Date$
-// $Author$
-// $HeadURL$
-//
 // Original Creation Date: 2017-05-30
 // Author: Brandon Huber
 //
