@@ -25,8 +25,21 @@ TEST(SnprintfTest, SingleStringWithInsufficientSpace)
     // Make sure that snprintf() did not alter anything past where it needed to
     // (being, the position of the null terminator).
     EXPECT_EQ('Z', dest[strlen(dest) + 1]);
-    // EXPECT_EQ('Z', dest[3]);
-    // EXPECT_STREQ("fooZZZZZZZZZZZZ", dest);
+}
+
+// Tests putting a single string into sprintf with only one char of space
+// available.
+TEST(SnprintfTest, SingleStringWithSingleCharOfSpace)
+{
+    int r;
+    char dest[] = "ZZZZZZZZZZZZZZZ";
+    r = snprintf(dest, 1, "%s", "foo");
+    EXPECT_STREQ("", dest);
+    EXPECT_EQ(3, r);
+    //
+    // Make sure that snprintf() did not alter anything past where it needed to
+    // (being, the position of the null terminator).
+    EXPECT_EQ('Z', dest[strlen(dest) + 1]);
 }
 
 // Tests putting a single string into sprintf with more than enough space in the
@@ -43,6 +56,37 @@ TEST(SnprintfTest, SingleStringWithMoreThanEnoughSpace)
     EXPECT_EQ('Z', dest[strlen(dest) + 1]);
     EXPECT_STREQ("foo", dest);
 }
+
+// Tests putting a single string into sprintf while providing "0" to snprintf as
+// the count of available bytes in the destination.
+TEST(SnprintfTest, SingleStringWithZeroCount)
+{
+    int r;
+    char dest[] = "ZZZZZZZZZZZZZZZ";
+    r = snprintf(dest, 0, "%s", "foo");
+    EXPECT_STREQ("ZZZZZZZZZZZZZZZ", dest);
+    EXPECT_EQ(3, r);
+    //
+    // Make sure that snprintf() did not alter anything past where it needed to
+    // (being, the position of the null terminator).
+//    EXPECT_EQ('Z', dest[strlen(dest) + 1]);
+}
+
+// Tests putting two strings into sprintf with more than enough space in the
+// destination.
+TEST(SnprintfTest, TwoStringsWithMoreThanEnoughSpace)
+{
+    int r;
+    char dest[] = "ZZZZZZZZZZZZZZZ";
+    r = snprintf(dest, strlen(dest) - 1, "%s%s", "foo", "bar");
+    EXPECT_EQ(6, r);
+    //
+    // Make sure that snprintf() did not alter anything past where it needed to
+    // (being, the position of the null terminator).
+    EXPECT_EQ('Z', dest[strlen(dest) + 1]);
+    EXPECT_STREQ("foobar", dest);
+}
+
 int main(int argc, char *argv[])
 {
     testing::InitGoogleTest(&argc, argv);
