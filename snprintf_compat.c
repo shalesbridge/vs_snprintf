@@ -17,49 +17,17 @@
 #if defined(_MSC_VER) && _MSC_VER < 1900 && !defined(snprintf)
 
 #include "stdarg.h" // va_list and friends
+#include "crtdefs.h" // size_t
 
 
-/*
- * Calculates what the size of a formatted string will be after being run
- * through sprintf().
- */
-int predictFormattedStringSize(const char *format, ...)
-{
-    va_list vl;
-    int calculated_count;
-    FILE *fptr;
 
-    fptr = fopen("NUL", "w");
-    if (ftpr == NULL)
-    {
-        //TODO: Add error handling here.
-        
-        return NULL;
-    }
-
-    va_start(vl, format);
-    calculated_count = vfprintf(fptr, format, vl);
-    va_end(vl);
-    if (calculated_count < 0)
-    {
-        //TODO: Add error handling here.
-        
-        return NULL;
-    }
-
-    if (fclose(fptr))
-    {
-        //TODO: Add error handling here.
-        
-        return NULL;
-    }
-    return calculated_count;
-
-}
 
 /* Visual Studio's _vsnprintf differs from the standard C snprintf in the
  * following ways:
- *      1) If there is not enough space in the destination string, "s",
+ *      1) If there is not enough space in the destination string, "s", then
+ *         _vsnprintf will return -1 whereas snprintf will return the total
+ *         number of bytes that would have been written if the destination was
+ *         large enough.
  *
  *
  */
@@ -88,3 +56,4 @@ int snprintf(char *s, size_t n, const char *format, ...)
 }
 
 
+#endif

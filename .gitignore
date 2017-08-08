@@ -1,2 +1,9 @@
 CMakeCache.txt
 CMakeFiles
+googletest
+*.sln
+*.suo
+*.vcproj
+*.vcproj.*.user
+*.dir
+*.ncb

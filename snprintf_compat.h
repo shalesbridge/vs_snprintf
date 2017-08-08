@@ -34,6 +34,6 @@ int snprintf ( char * s, size_t n, const char * format, ... );
 #endif
 
 
-ifdef __cplusplus
+#ifdef __cplusplus
 }
 #endif
