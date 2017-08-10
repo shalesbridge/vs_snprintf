@@ -16,15 +16,21 @@ _snprintf_ usually resides.  This way, you can simply include this library in
 your project and know that it (hopefully) did "the right thing" to make
 _snprintf_ available.
 
-##Compiling##
+## Compiling
 
 A _CMakeLists.txt_ file has been included for use with _cmake_.  To generate
 makefiles for your system, run:
+
 > cmake .
+
 ...however, you probably just want to copy `snprintf_compat.c` and
 `snprintf_compat.h` into your project and include them in your build system of
 choice.
 
-To enable unit tests, run:
+
+## Unit Testing
+
+To generate makefiles that will include unit testing targets, run:
+
 > cmake -Dtest=on .
 
