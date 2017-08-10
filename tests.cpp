@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// tests.c
+// tests.cpp
 //
 // Google tests for snprintf_compat.
 //
@@ -13,13 +13,43 @@
 #include "snprintf_compat.h"
 
 // Tests putting a single string into sprintf with insufficient space in the
-// destination.
-TEST(SnprintfTest, SingleStringWithInsufficientSpace)
+// destination, which is 1 byte too short.
+TEST(SnprintfTest, SingleStringWithInsufficientSpace1)
 {
     int r;
     char dest[] = "ZZZZZZZZZZZZZZZ";
     r = snprintf(dest, 3, "%s", "foo");
     EXPECT_STREQ("fo", dest);
+    EXPECT_EQ(3, r);
+    //
+    // Make sure that snprintf() did not alter anything past where it needed to
+    // (being, the position of the null terminator).
+    EXPECT_EQ('Z', dest[strlen(dest) + 1]);
+}
+
+// Tests putting a single string into sprintf with insufficient space in the
+// destination, which is 2 bytes too short.
+TEST(SnprintfTest, SingleStringWithInsufficientSpace2)
+{
+    int r;
+    char dest[] = "ZZZZZZZZZZZZZZZ";
+    r = snprintf(dest, 2, "%s", "foo");
+    EXPECT_STREQ("f", dest);
+    EXPECT_EQ(3, r);
+    //
+    // Make sure that snprintf() did not alter anything past where it needed to
+    // (being, the position of the null terminator).
+    EXPECT_EQ('Z', dest[strlen(dest) + 1]);
+}
+
+// Tests putting a single string into sprintf with insufficient space in the
+// destination, which is 3 bytes too short.
+TEST(SnprintfTest, SingleStringWithInsufficientSpace3)
+{
+    int r;
+    char dest[] = "ZZZZZZZZZZZZZZZ";
+    r = snprintf(dest, 1, "%s", "foo");
+    EXPECT_STREQ("", dest);
     EXPECT_EQ(3, r);
     //
     // Make sure that snprintf() did not alter anything past where it needed to
