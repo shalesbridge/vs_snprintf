@@ -1,0 +1,9 @@
+snprintf_compat.c and snprintf_compat.h are public domain so that they may be
+used by anyone for any purpose, commercial or non-commercial.
+
+The CMakeLists.txt file contains code from other sources, notably
+https://github.com/google/googletest/tree/master/googletest#incorporating-into-an-existing-cmake-project
+.  The author of snprintf_compat.c and snprintf_compat.h claims no intellectual
+property rights to these code blocks, nor any claim as to their licensing.
+However, the code in snprintf_compat.c and snprintf_compat.h is still public
+domain and unencumbered by licensing or usage restriction.
