@@ -24,15 +24,6 @@
 
 
 
-/* Visual Studio's _vsnprintf differs from the standard C snprintf in the
- * following ways:
- *      1) If there is not enough space in the destination string, "s", then
- *         _vsnprintf will return -1 whereas snprintf will return the total
- *         number of bytes that would have been written if the destination was
- *         large enough.
- *
- *
- */
 int snprintf(char *s, size_t n, const char *format, ...)
 {
     size_t r;
